@@ -1,0 +1,114 @@
+@extends('admin.master')
+<style>
+    .table-responsive{
+        overflow-x:auto;
+    }
+</style>
+@section('body')
+    <section class="py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="text-center">All Category</h3>
+                        </div>
+                        <div class="">
+                            <div class="page-content fade-in-up">
+                                <div class="ibox">
+                                    <div class="ibox-head">
+                                        <div class="ibox-title">Data Table</div>
+                                    </div>
+                                    <div class="ibox-body table-responsive">
+                                        <table class="table table-striped table-bordered table-hover " id="example-table">
+                                            <thead>
+                                            <tr>
+                                                <th>SL</th>
+                                                <th>Category Name</th>
+                                                <th>Sub Category Name</th>
+                                                <th>Brand Name</th>
+                                                <th>unit Name</th>
+                                                <th>Product Name</th>
+                                                <th>Regular Price</th>
+                                                <th>Selling Price</th>
+                                                <th>Short Description</th>
+                                                <th>long Description</th>
+                                                <th>product Image</th>
+                                                <th>product other Image</th>
+                                                <th>Status</th>
+                                                <th>Action</th>
+
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            @foreach( $products as $product)
+                                                <tr>
+                                                    <td>{{ $loop->iteration }}</td>
+                                                    <td>{{ $product->category->name }}</td>
+                                                    <td>{{ $product->subCategory->name }}</td>
+                                                    <td>{{ $product->brand->name }}</td>
+                                                    <td>{{ $product->unit->name }}</td>
+                                                    <td>{{ $product->name }}</td>
+                                                    <td>{{ $product->regular_price }}</td>
+                                                    <td>{{ $product->selling_price }}</td>
+                                                    <td>{!! $product->short_description !!}</td>
+                                                    <td>{!!   $product->long_description !!}</td>
+                                                    <td><img src="{{asset($product->image)  }}" width="50px" height="50px" alt=""></td>
+
+                                                    <td>@foreach($subImages as $subImage)
+                                                            @if($product->id==$subImage->product_id)
+                                                            <img src="{{ asset($subImage->image) }}" width="50px" height="50px" alt="">
+                                                                @endif
+                                                                @endforeach</td>
+
+                                                    <td>{{ $product->status==1?  'Active':'Deactive' }}</td>
+{{--                                                    <td><a href="{{ route('edit-product',['id'  =>$product->id]) }}" class="btn btn-success">Edit</a>--}}
+{{--                                                        <a href="{{ route('delete-product',['id'=>$product->id]) }}" onclick="return confirm('Are Your sure')" class="btn btn-danger">Delete</a></td>--}}
+                                                </tr>
+                                            @endforeach
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div>
+                                    <a class="adminca-banner" href="http://admincast.com/adminca/" target="_blank">
+                                        <div class="adminca-banner-ribbon"><i class="fa fa-trophy mr-2"></i>PREMIUM TEMPLATE</div>
+                                        <div class="wrap-1">
+                                            <div class="wrap-2">
+                                                <div>
+                                                    <img src="./assets/img/adminca-banner/adminca-preview.jpg" style="height:160px;margin-top:50px;" />
+                                                </div>
+                                                <div class="color-white" style="margin-left:40px;">
+                                                    <h1 class="font-bold">ADMINCA</h1>
+                                                    <p class="font-16">Save your time, choose the best</p>
+                                                    <ul class="list-unstyled">
+                                                        <li class="m-b-5"><i class="ti-check m-r-5"></i>High Quality Design</li>
+                                                        <li class="m-b-5"><i class="ti-check m-r-5"></i>Fully Customizable and Easy Code</li>
+                                                        <li class="m-b-5"><i class="ti-check m-r-5"></i>Bootstrap 4 and Angular 5+</li>
+                                                        <li class="m-b-5"><i class="ti-check m-r-5"></i>Best Build Tools: Gulp, SaSS, Pug...</li>
+                                                        <li><i class="ti-check m-r-5"></i>More layouts, pages, components</li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <div style="flex:1;">
+                                                <div class="d-flex justify-content-end wrap-3">
+                                                    <div class="adminca-banner-b m-r-20">
+                                                        <img src="./assets/img/adminca-banner/bootstrap.png" style="width:40px;margin-right:10px;" />Bootstrap v4</div>
+                                                    <div class="adminca-banner-b m-r-10">
+                                                        <img src="./assets/img/adminca-banner/angular.png" style="width:35px;margin-right:10px;" />Angular v5+</div>
+                                                </div>
+                                                <div class="dev-img">
+                                                    <img src="./assets/img/adminca-banner/sprite.png" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+@endsection
