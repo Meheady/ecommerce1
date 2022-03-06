@@ -176,7 +176,32 @@
 </div>
 <!-- All JS is here -->
 @include('front.includes.script')
-
+@if(Session::has('massage'))
+    <script>
+        $(document).ready(function(){
+            toastr.success('{{Session::get('massage')}}')
+        });
+    </script>
+@endif
+<script>
+    $(".remove-from-cart").click(function (e) {
+        e.preventDefault();
+        var ele = $(this).data('id');
+        if (confirm("are you sure?")){
+            $.ajax({
+                url: '{{ route('remove.from.cart') }}',
+                method: "POST",
+                data: {
+                    _token: '{{ csrf_token() }}',
+                    id: ele
+                },
+                success: function (response) {
+                    window.location.reload();
+                }
+            });
+        }
+    });
+</script>
 
 </body>
 

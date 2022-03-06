@@ -34,9 +34,31 @@ Route::get('/get-subproduct-info-for-modal',[
     'as'=>'get-subproduct-info-for-modal'
 ]);
 
-Route::get('/product-details',[
+Route::get('/product-details/{id}',[
     'uses' =>'App\Http\Controllers\Front\UrdanController@productDetails',
     'as'=>'product-details'
+]);
+
+// cart route
+
+Route::get('/add-to-cart/{id}',[
+    'uses' =>'App\Http\Controllers\Front\UrdanController@addToCart',
+    'as'=>'add-to-cart'
+]);
+
+Route::get('cart',[
+    'uses'=>'App\Http\Controllers\Front\UrdanController@cartDetails',
+    'as'=>'cart'
+]);
+
+Route::post('/remove-from-cart',[
+    'uses'=>'App\Http\Controllers\Front\UrdanController@removeItem',
+    'as'=>'remove.from.cart'
+
+]);
+Route::post('/update-cart',[
+    'uses'=> 'App\Http\Controllers\Front\UrdanController@updateCart',
+    'as'=> 'update.cart'
 ]);
 
 //Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {

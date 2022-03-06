@@ -99,8 +99,8 @@
                     <div class="header-action-wrap">
                         <div class="header-action-style header-search-1">
                             <a class="search-toggle" href="#">
-                                <i class="pe-7s-search s-open"></i>
-                                <i class="pe-7s-close s-close"></i>
+                                <i class="pe-7s-search s-opcloseen"></i>
+                                <i class="pe-7s-close s-"></i>
                             </a>
                             <div class="search-wrap-1">
                                 <form action="#">
@@ -116,8 +116,14 @@
                             <a title="Wishlist" href="wishlist.html"><i class="pe-7s-like"></i></a>
                         </div>
                         <div class="header-action-style header-action-cart">
+
                             <a class="cart-active" href="#"><i class="pe-7s-shopbag"></i>
-                                <span class="product-count bg-black">01</span>
+
+                                <span class="product-count bg-black">
+                                    {{ count((array) session('cart')) }}
+
+
+                                </span>
                             </a>
                         </div>
                         <div class="header-action-style d-block d-lg-none">
@@ -134,38 +140,34 @@
     <div class="sidebar-cart-all">
         <a class="cart-close" href="#"><i class="pe-7s-close"></i></a>
         <div class="cart-content">
+            @php $total = 0 @endphp
+            @foreach((array) session('cart') as $id => $details)
+                @php $total += $details['price'] * $details['quantity'] @endphp
+            @endforeach
             <h3>Shopping Cart</h3>
             <ul>
+                @if(session('cart'))
+                    @foreach(session('cart') as $id => $details)
                 <li>
                     <div class="cart-img">
-                        <a href="#"><img src="{{asset('/')}}assets/images/cart/cart-1.jpg" alt=""></a>
+                        <a href="#"><img src="{{ asset($details['image']) }} " alt=""></a>
                     </div>
                     <div class="cart-title">
-                        <h4><a href="#">Stylish Swing Chair</a></h4>
-                        <span> 1 × $49.00	</span>
+                        <h4><a href="#">{{ $details['name'] }}</a></h4>
+                        <span>Quantity:{{ $details['quantity'] }} * ${{ $details['price'] }}</span>
                     </div>
                     <div class="cart-delete">
-                        <a href="#">×</a>
+                        <a href="#" class="remove-from-cart" data-id="{{ $id }}">×</a>
                     </div>
                 </li>
-                <li>
-                    <div class="cart-img">
-                        <a href="#"><img src="{{asset('/')}}assets/images/cart/cart-2.jpg" alt=""></a>
-                    </div>
-                    <div class="cart-title">
-                        <h4><a href="#">Modern Chairs</a></h4>
-                        <span> 1 × $49.00	</span>
-                    </div>
-                    <div class="cart-delete">
-                        <a href="#">×</a>
-                    </div>
-                </li>
+                    @endforeach
+                @endif
             </ul>
             <div class="cart-total">
-                <h4>Subtotal: <span>$170.00</span></h4>
+                <h4>Subtotal: <span>$ {{ $total }}</span></h4>
             </div>
             <div class="cart-btn btn-hover">
-                <a class="theme-color" href="cart.html">view cart</a>
+                <a class="theme-color" href="{{ route('cart') }}">view cart</a>
             </div>
             <div class="checkout-btn btn-hover">
                 <a class="theme-color" href="checkout.html">checkout</a>
@@ -173,4 +175,25 @@
         </div>
     </div>
 </div>
+{{--@section('front-js')--}}
+{{--    <script>--}}
+{{--        $(".remove-from-cart").click(function (e) {--}}
+{{--            e.preventDefault();--}}
+{{--            var ele = $(this).data('id');--}}
+{{--            if (confirm("are you sure?")){--}}
+{{--                $.ajax({--}}
+{{--                    url: '{{ route('remove.from.cart') }}',--}}
+{{--                    method: "POST",--}}
+{{--                    data: {--}}
+{{--                        _token: '{{ csrf_token() }}',--}}
+{{--                        id: ele--}}
+{{--                    },--}}
+{{--                    success: function (response) {--}}
+{{--                        window.location.reload();--}}
+{{--                    }--}}
+{{--                });--}}
+{{--            }--}}
+{{--        });--}}
+{{--    </script>--}}
+{{--@endsection--}}
 
