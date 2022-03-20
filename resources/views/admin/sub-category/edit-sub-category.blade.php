@@ -12,13 +12,15 @@
                         <div class="card-body">
                             <form action="{{ route('update-subcategory') }}" method="post" enctype="multipart/form-data">
                                 @csrf
+                                <input type="hidden" name="up_id" value="{{ $subCategory->id }}">
+
                                 <div class="form-group row">
                                     <label for="" class="col-form-label col-md-3">Category Name</label>
                                     <div class="col-md-9">
                                         <select name="category_id"  class="form-control" id="">
                                             <option selected disabled value="">Select Category</option>
                                             @foreach($categories as $key => $category)
-                                                <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                                <option value="{{ $category->id}}" {{ $category->id == $subCategory->category_id ? 'selected':'' }}>{{ $category->name }}</option>
                                             @endforeach
                                         </select>
                                     </div>

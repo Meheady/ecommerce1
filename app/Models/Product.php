@@ -62,4 +62,9 @@ class Product extends Model
     {
         return $this->belongsTo(Unit::class);
     }
+
+    public function relsubImage()
+    {
+        return $this->hasMany(SubImage::class);
+    }
 }

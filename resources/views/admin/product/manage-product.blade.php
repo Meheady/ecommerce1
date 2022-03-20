@@ -62,8 +62,9 @@
                                                                 @endforeach</td>
 
                                                     <td>{{ $product->status==1?  'Active':'Deactive' }}</td>
-{{--                                                    <td><a href="{{ route('edit-product',['id'  =>$product->id]) }}" class="btn btn-success">Edit</a>--}}
-{{--                                                        <a href="{{ route('delete-product',['id'=>$product->id]) }}" onclick="return confirm('Are Your sure')" class="btn btn-danger">Delete</a></td>--}}
+                                                    <td>
+{{--                                                        <a href="{{ route('edit-product',['id'  =>$product->id]) }}" class="btn btn-success">Edit</a>--}}
+                                                        <a href="{{ route('delete-product',['id'=>$product->id]) }}" onclick="return confirm('Are Your sure')" class="btn btn-danger">Delete</a></td>
                                                 </tr>
                                             @endforeach
                                             </tbody>

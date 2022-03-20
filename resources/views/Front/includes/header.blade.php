@@ -1,3 +1,10 @@
+@section('front-css')
+    <style>
+        ul.mega-menu-mrg-1.mega-menu-style.megamneupadding {
+            padding-bottom: 28px!important;
+        }
+    </style>
+@endsection
 <header class="header-area header-responsive-padding header-height-1">
     <div class="header-top d-none d-lg-block bg-gray">
         <div class="container">
@@ -51,7 +58,7 @@
                                 </li>
                                 <li>
                                     <a href="#">Categories</a>
-                                    <ul class="mega-menu-style mega-menu-mrg-1">
+                                    <ul class="mega-menu-style mega-menu-mrg-1 megamneupadding">
                                         <li>
                                             <ul>
                                                 @foreach($categories as $category)

@@ -203,5 +203,9 @@ Route::group(['middleware'=>['auth:sanctum', 'verified']],function(){
     Route::get('/get-sub-category-by-category-id/{id}',[
         'uses' =>'App\Http\Controllers\admin\ProductController@getSubCategoryId',
     ]);
+    Route::get('/delete-product/{id}',[
+        'uses'=>'App\Http\Controllers\admin\ProductController@deleteProduct',
+        'as'=>'delete-product',
+    ]);
 });
 

@@ -18,6 +18,7 @@ class ProductController extends Controller
     protected $products;
     protected $subImages;
     protected $categoryName;
+    protected $subImage;
     public function addProduct(){
 
         return view('admin.product.add-product',[
@@ -53,9 +54,20 @@ class ProductController extends Controller
 
     public function getSubCategoryId($id)
     {
-        $this->subCategories = SubCategory::where('category_id',$id)->get();
+        $this->subCategories = SubCategory::where('category_id',$id)->first();
         return json_encode($this->subCategories);
     }
 
+    public function deleteProduct($id)
+    {
+        $this->product = Product::find($id)->relsubImage()->where('product_id',$id)->get();
+        if (file_exists($this->product->image)){
+            unlink($this->product->image);
+        }
+        $this->product->delete();
+        return redirect()->back()->with('massage','Delete Success');
+    }
+
+    
 
 }

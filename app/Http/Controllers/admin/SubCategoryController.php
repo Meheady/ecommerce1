@@ -36,8 +36,8 @@ class SubCategoryController extends Controller
     }
     public function updateSubCategory(Request $request)
     {
-        SubCategory::updateCategory($request);
-        return redirect('/manage-sub-category')->with('massage', 'Update Successfully');
+        SubCategory::updateSubCategory($request);
+        return redirect('/manage-subcategory')->with('massage', 'Update Successfully');
     }
 
     public function deleteSubCategory($id)

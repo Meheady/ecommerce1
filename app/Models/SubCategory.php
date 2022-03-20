@@ -17,6 +17,7 @@ class SubCategory extends Model
     protected static $imgUrl;
 
 
+
     public static function getImageUrl($request)
     {
         if ($request->file('image')){
